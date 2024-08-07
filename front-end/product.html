@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <ul class="nav-list">
+                    <li><h3><a href="#">Logo</a></h3></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Products</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <button class="logout-btn">Log out</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <form id="newProductForm">
+            <h3>Add New Product</h3>
+            <input type="text" id="productName" placeholder="Product Name">
+            <input type="number" id="productPrice" placeholder="Product Price" min="5">
+            <button type="submit">Add Product</button>
+        </form>
+        <form id="uptatedProductForm">
+            <h3>Update or Change Product</h3>
+            <input type="text" id="uproductName" placeholder="New Product Name">
+            <input type="number" id="uproductPrice" placeholder="New Product Price" min="5">
+            <button type="submit">Update Product</button>
+        </form>
+
+        <div id="products">
+            <h2>Products</h2>
+            <div id="productList">
+    
+            </div>
+        </div>
+        
+    </main>
+    <footer></footer>
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.3/axios.min.js" integrity="sha512-zJXKBryKlsiDaWcWQ9fuvy50SG03/Qc5SqfLXxHmk9XiUUbcD9lXYjHDBxLFOuZSU6ULXaJ69bd7blSMEgxXNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="product.js"></script>
+</body>
+</html>

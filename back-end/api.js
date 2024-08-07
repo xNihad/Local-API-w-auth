@@ -82,6 +82,25 @@ app.delete("/products/:id", tokenControl, async (req, res) => {
 });
 
 
+app.put("/products/:id", tokenControl, async (req, res) => {
+    let { error } = ProductValidationSchemma.validate(req.body);
+    if (error) {
+        return res.status(400).send(error.details[0].message);
+    }
+
+    try {
+        let updatedProduct = await ProductModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedProduct) {
+            return res.status(404).send("Product not found");
+        }
+        res.send(updatedProduct);
+    } catch (err) {
+        res.status(500).send("Error updating product");
+    }
+});
+
+
+
 app.post("/users/register", async (req, res)=>{
     let userRegister = await UserModel.findOne({email:req.body.email})
 

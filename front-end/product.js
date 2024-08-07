@@ -21,6 +21,9 @@ async function getProducts() {
     showProducts(products.data);
 }
 
+
+let updatedProductIdInput = document.querySelector("#updatedProductId");
+
 function showProducts(pro) {
     productList.innerHTML=""
     pro.forEach(pel => {
@@ -29,6 +32,7 @@ function showProducts(pro) {
          <div class="product-item">
                 <span>${pel.name} - $${pel.price}</span>
                 <button class="trash-btn" btn-id=${pel._id}>Delete🗑️</button>
+                <button class="edit-btn" btn-id=${pel._id}>Edit✏️</button>
          </div>
         `
 
@@ -50,8 +54,49 @@ function showProducts(pro) {
             } 
         })
      });
+
+
+     let editBtns = document.querySelectorAll(".edit-btn");
+        editBtns.forEach(btn => {
+            btn.addEventListener("click", function () {
+                let id = btn.getAttribute("btn-id");
+                let product = pro.find(p => p._id === id);
+                uProductName.value = product.name;
+                uProductPrice.value = product.price;
+                updatedProductIdInput.value = id;
+            });
+        });
+
+
     });
 }
+
+
+updatedProductForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    let updatedProductId = updatedProductIdInput.value;
+    if (!updatedProductId) return;
+
+    let updatedPro = {
+        name: uProductName.value,
+        price: uProductPrice.value
+    }
+
+    try {
+        await axios.put(`${BaseUrl}/${updatedProductId}`, updatedPro, {
+            headers: {
+                "auth-tokensss": localStorage.getItem("tokenzzz")
+            }
+        });
+        uProductName.value = "";
+        uProductPrice.value = "";
+        updatedProductIdInput.value = "";
+        getProducts();
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 newProductForm.addEventListener("submit",async function(event){
     event.preventDefault()
@@ -68,6 +113,9 @@ newProductForm.addEventListener("submit",async function(event){
     newProductPrice.value=""
     getProducts()
 })
+
+
+
 
 
 
